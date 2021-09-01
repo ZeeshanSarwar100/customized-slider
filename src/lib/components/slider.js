@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
-import menuIcon from "./menu_icon.png";
 import style from "./styles/style.module.scss";
+import { isMobile } from "react-device-detect";
 
 const data = [
   { img: "", name: "Dashboard", url: "/dashboard" },
@@ -9,24 +9,27 @@ const data = [
   { img: "", name: "Service availibility", url: "service" },
 ];
 
-let isMobile = false;
-
-// testing 
 
 const Slider = (props) => {
-  const [isMobile, setIsMobile] = useState(false);
+
+  const [isMobileFlag, setIsMobileFlag] = useState(isMobile);
+  useEffect(() => {
+    setIsMobileFlag(isMobile)
+  }, [isMobile])
+
+  console.log("is mobile flag heree" , isMobileFlag)
   return (
     <React.Fragment>
       <div
-        className={`${style.menuItemWrapper} ${isMobile ? style.fixWidth : ""}`}
+        className={`${style.menuItemWrapper} ${isMobileFlag ? style.fixWidth : ""}`}
       >
         <div className={style.menuTitleWrapper}>
-          <label className={`${isMobile ? style.dNone : ""} ${style.title}`}>
+          <label className={`${isMobileFlag ? style.dNone : ""} ${style.title}`}>
             CIMB
           </label>
           <div
             onClick={() => {
-              setIsMobile(!isMobile);
+              setIsMobileFlag(!isMobileFlag);
             }}
           >
             <div className={style.menuIcon}></div>
@@ -45,7 +48,7 @@ const Slider = (props) => {
                     <img src={logo} alt="logo" />
                     <label
                       className={`${style.label} ${
-                        isMobile ? style.dNone : ""
+                        isMobileFlag ? style.dNone : ""
                       }`}
                     >
                       {item.name}
@@ -61,7 +64,7 @@ const Slider = (props) => {
             <span>
               <img src={logo} alt="logo" />
               <label
-                className={`${style.label} ${isMobile ? style.dNone : ""}`}
+                className={`${style.label} ${isMobileFlag ? style.dNone : ""}`}
               >
                 Logout
               </label>

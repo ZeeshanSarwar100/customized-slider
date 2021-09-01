@@ -11,9 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _logo = _interopRequireDefault(require("./logo.svg"));
 
-var _menu_icon = _interopRequireDefault(require("./menu_icon.png"));
-
 var _styleModule = _interopRequireDefault(require("./styles/style.module.scss"));
+
+var _reactDeviceDetect = require("react-device-detect");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34,19 +34,22 @@ const data = [{
   name: "Service availibility",
   url: "service"
 }];
-let isMobile = false; // testing 
 
 const Slider = props => {
-  const [isMobile, setIsMobile] = (0, _react.useState)(false);
+  const [isMobileFlag, setIsMobileFlag] = (0, _react.useState)(_reactDeviceDetect.isMobile);
+  (0, _react.useEffect)(() => {
+    setIsMobileFlag(_reactDeviceDetect.isMobile);
+  }, [_reactDeviceDetect.isMobile]);
+  console.log("is mobile flag heree", isMobileFlag);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "".concat(_styleModule.default.menuItemWrapper, " ").concat(isMobile ? _styleModule.default.fixWidth : "")
+    className: "".concat(_styleModule.default.menuItemWrapper, " ").concat(isMobileFlag ? _styleModule.default.fixWidth : "")
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.menuTitleWrapper
   }, /*#__PURE__*/_react.default.createElement("label", {
-    className: "".concat(isMobile ? _styleModule.default.dNone : "", " ").concat(_styleModule.default.title)
+    className: "".concat(isMobileFlag ? _styleModule.default.dNone : "", " ").concat(_styleModule.default.title)
   }, "CIMB"), /*#__PURE__*/_react.default.createElement("div", {
     onClick: () => {
-      setIsMobile(!isMobile);
+      setIsMobileFlag(!isMobileFlag);
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.menuIcon
@@ -65,7 +68,7 @@ const Slider = props => {
       src: _logo.default,
       alt: "logo"
     }), /*#__PURE__*/_react.default.createElement("label", {
-      className: "".concat(_styleModule.default.label, " ").concat(isMobile ? _styleModule.default.dNone : "")
+      className: "".concat(_styleModule.default.label, " ").concat(isMobileFlag ? _styleModule.default.dNone : "")
     }, item.name)));
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.logout
@@ -75,7 +78,7 @@ const Slider = props => {
     src: _logo.default,
     alt: "logo"
   }), /*#__PURE__*/_react.default.createElement("label", {
-    className: "".concat(_styleModule.default.label, " ").concat(isMobile ? _styleModule.default.dNone : "")
+    className: "".concat(_styleModule.default.label, " ").concat(isMobileFlag ? _styleModule.default.dNone : "")
   }, "Logout"))))));
 };
 

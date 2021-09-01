@@ -1,6 +1,5 @@
 import logo from "./logo.svg";
 import Slider from './lib/components/slider'
-// import "./style.css";
 
 const data = [
   { img: "", name: "dashboard" },
@@ -9,7 +8,9 @@ const data = [
   { img: "", name: "contact" },
 ];
 
+
 function App() {
+  
   return (
     <Slider/>
   );
