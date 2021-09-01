@@ -34,7 +34,7 @@ const data = [{
   name: "Service availibility",
   url: "service"
 }];
-let isMobile = false;
+let isMobile = false; // testing 
 
 const Slider = props => {
   const [isMobile, setIsMobile] = (0, _react.useState)(false);

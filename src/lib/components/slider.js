@@ -11,6 +11,8 @@ const data = [
 
 let isMobile = false;
 
+// testing 
+
 const Slider = (props) => {
   const [isMobile, setIsMobile] = useState(false);
   return (
