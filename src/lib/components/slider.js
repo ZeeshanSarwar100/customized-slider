@@ -3,16 +3,13 @@ import logo from "./logo.svg";
 import style from "./styles/style.module.scss";
 import { isMobile } from "react-device-detect";
 
-const data = [
-  { img: "", name: "Dashboard", url: "/dashboard" },
-  { img: "", name: "Document", url: "/document" },
-  { img: "", name: "Service availibility", url: "service" },
-];
+
 
 
 const Slider = (props) => {
 
   const [isMobileFlag, setIsMobileFlag] = useState(isMobile);
+  const {data , isLoggendIn} = props
   useEffect(() => {
     setIsMobileFlag(isMobile)
   }, [isMobile])

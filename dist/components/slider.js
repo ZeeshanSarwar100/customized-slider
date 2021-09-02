@@ -21,22 +21,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const data = [{
-  img: "",
-  name: "Dashboard",
-  url: "/dashboard"
-}, {
-  img: "",
-  name: "Document",
-  url: "/document"
-}, {
-  img: "",
-  name: "Service availibility",
-  url: "service"
-}];
-
 const Slider = props => {
   const [isMobileFlag, setIsMobileFlag] = (0, _react.useState)(_reactDeviceDetect.isMobile);
+  const {
+    data,
+    isLoggendIn
+  } = props;
   (0, _react.useEffect)(() => {
     setIsMobileFlag(_reactDeviceDetect.isMobile);
   }, [_reactDeviceDetect.isMobile]);
