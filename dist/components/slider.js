@@ -27,19 +27,29 @@ const Slider = props => {
     data,
     isLoggendIn
   } = props;
+  const [isOpenCollapse, setIsOpenCollapse] = (0, _react.useState)(!_reactDeviceDetect.isMobile);
   (0, _react.useEffect)(() => {
     setIsMobileFlag(_reactDeviceDetect.isMobile);
   }, [_reactDeviceDetect.isMobile]);
+  console.log("mobile , collapse", _reactDeviceDetect.isMobile, isOpenCollapse);
+
+  const toggleCollapse = () => {
+    setIsOpenCollapse(!isOpenCollapse);
+    _reactDeviceDetect.isDesktop && props.callBackIsCollapseToggle(); // setIsMobileFlag(!)
+  };
+
   console.log("is mobile flag heree", isMobileFlag);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "".concat(_styleModule.default.menuItemWrapper, " ").concat(isMobileFlag ? _styleModule.default.fixWidth : "")
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "".concat(_styleModule.default.mainWrapper, " ").concat(_reactDeviceDetect.isMobile ? isOpenCollapse ? _styleModule.default.fullWidth : _styleModule.default.fixWidth : '')
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "".concat(_styleModule.default.menuItemWrapper)
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.menuTitleWrapper
   }, /*#__PURE__*/_react.default.createElement("label", {
-    className: "".concat(isMobileFlag ? _styleModule.default.dNone : "", " ").concat(_styleModule.default.title)
+    className: "".concat(!isOpenCollapse ? _styleModule.default.dNone : "", " ").concat(_styleModule.default.title)
   }, "CIMB"), /*#__PURE__*/_react.default.createElement("div", {
     onClick: () => {
-      setIsMobileFlag(!isMobileFlag);
+      toggleCollapse();
     }
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.menuIcon
@@ -58,7 +68,7 @@ const Slider = props => {
       src: _logo.default,
       alt: "logo"
     }), /*#__PURE__*/_react.default.createElement("label", {
-      className: "".concat(_styleModule.default.label, " ").concat(isMobileFlag ? _styleModule.default.dNone : "")
+      className: "".concat(_styleModule.default.label, " ").concat(!isOpenCollapse ? _styleModule.default.dNone : "")
     }, item.name)));
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: _styleModule.default.logout
@@ -68,7 +78,7 @@ const Slider = props => {
     src: _logo.default,
     alt: "logo"
   }), /*#__PURE__*/_react.default.createElement("label", {
-    className: "".concat(_styleModule.default.label, " ").concat(isMobileFlag ? _styleModule.default.dNone : "")
+    className: "".concat(_styleModule.default.label, " ").concat(!isOpenCollapse ? _styleModule.default.dNone : "")
   }, "Logout"))))));
 };
 

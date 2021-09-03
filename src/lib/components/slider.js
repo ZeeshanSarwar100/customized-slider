@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import style from "./styles/style.module.scss";
-import { isMobile } from "react-device-detect";
+import { isDesktop, isMobile } from "react-device-detect";
 
 
 
@@ -10,23 +10,34 @@ const Slider = (props) => {
 
   const [isMobileFlag, setIsMobileFlag] = useState(isMobile);
   const {data , isLoggendIn} = props
+  const [isOpenCollapse , setIsOpenCollapse] = useState(!isMobile)
   useEffect(() => {
     setIsMobileFlag(isMobile)
   }, [isMobile])
 
+
+  console.log("mobile , collapse" , isMobile , isOpenCollapse)
+
+
+  const toggleCollapse = () => {
+    setIsOpenCollapse(!isOpenCollapse)
+    isDesktop && props.callBackIsCollapseToggle()
+    // setIsMobileFlag(!)
+  }
+
   console.log("is mobile flag heree" , isMobileFlag)
   return (
-    <React.Fragment>
+    <div className = {`${style.mainWrapper} ${isMobile ? ( isOpenCollapse ? style.fullWidth : style.fixWidth) : '' }`}>
       <div
-        className={`${style.menuItemWrapper} ${isMobileFlag ? style.fixWidth : ""}`}
+        className={`${style.menuItemWrapper}`}
       >
         <div className={style.menuTitleWrapper}>
-          <label className={`${isMobileFlag ? style.dNone : ""} ${style.title}`}>
+          <label className={`${!isOpenCollapse ? style.dNone : ""} ${style.title}`}>
             CIMB
           </label>
           <div
             onClick={() => {
-              setIsMobileFlag(!isMobileFlag);
+              toggleCollapse();
             }}
           >
             <div className={style.menuIcon}></div>
@@ -45,7 +56,7 @@ const Slider = (props) => {
                     <img src={logo} alt="logo" />
                     <label
                       className={`${style.label} ${
-                        isMobileFlag ? style.dNone : ""
+                        !isOpenCollapse ? style.dNone : ""
                       }`}
                     >
                       {item.name}
@@ -61,7 +72,7 @@ const Slider = (props) => {
             <span>
               <img src={logo} alt="logo" />
               <label
-                className={`${style.label} ${isMobileFlag ? style.dNone : ""}`}
+                className={`${style.label} ${!isOpenCollapse ? style.dNone : ""}`}
               >
                 Logout
               </label>
@@ -69,7 +80,7 @@ const Slider = (props) => {
           </a>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
